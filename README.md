@@ -1,4 +1,4 @@
-# redux-kpt
+# react profile
 Clone it to your machine. run
 
 npm install
