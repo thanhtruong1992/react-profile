@@ -5,9 +5,15 @@ module.exports = {
     filename: './public/bundle.js'
   },
   resolve: {
-    path: __root,
+    root: __dirname,
     alias: {
-      
+      ApiService: 'app/services/index.js',
+      AuthService: 'app/services/auth/index.js',
+      Login: 'app/components/Login/index.js',
+      Header: 'app/components/Header/index.js',
+      Footer: 'app/components/Footer/index.js',
+      Register: 'app/components/Register/index.js',
+      HomePage: 'app/components/HomePage/index.js',
     }
   },
   module: {
@@ -15,10 +21,14 @@ module.exports = {
       {
         loader: 'babel-loader',
         query: {
-          presets: ['es2015', 'react']
+          presets: ['es2015', 'stage-0', 'react']
         },
         test: /\.jsx?$/,
         exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
       }
     ]
   }
