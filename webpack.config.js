@@ -14,6 +14,10 @@ module.exports = {
       Footer: 'app/components/Footer/index.js',
       Register: 'app/components/Register/index.js',
       HomePage: 'app/components/HomePage/index.js',
+      DialogNotify: 'app/components/Dialog/notify.js',
+      store: 'app/storeConfig.js',
+      reducer: 'app/reducer/index.js',
+      authReducer: 'app/reducer/auth.js',
     }
   },
   module: {

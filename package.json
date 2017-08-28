@@ -4,10 +4,10 @@
   "description": "",
   "repository": {
     "type": "git",
-    "url": "git@github.com:thanhtruong1992/react-profile.git"
+    "url": "git+https://github.com/thanhtruong/reacr-profile.git"
   },
   "author": "NTT",
-  "license": "MIT",
+  "license": "ISC",
   "main": "index.js",
   "dependencies": {
     "axios": "^0.16.2",
@@ -37,12 +37,6 @@
   "scripts": {
     "start": "node index.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/thanhtruong/reacr-profile.git"
-  },
-  "author": "NTT",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/thanhtruong/reacr-profile"
   },

@@ -1,7 +1,5 @@
 import React from 'react';
 
-require('./index.scss');
-
 class Footer extends React.Component {
   render() {
     return (
@@ -11,7 +9,7 @@ class Footer extends React.Component {
             Copyright 2017 NTT - Buil with passion
           </div>
           <div className="icon-share">
-            
+
           </div>
         </div>
       </div>

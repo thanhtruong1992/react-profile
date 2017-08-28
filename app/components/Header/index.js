@@ -1,10 +1,10 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-require('./index.scss');
+import {connect} from 'react-redux';
+import { NavLink, Link } from 'react-router-dom';
 
 class Header extends React.Component {
   render() {
+    const {auth} = this.props;
     return (
       <div className="header">
         <div className="container-custom header-content">
@@ -14,14 +14,24 @@ class Header extends React.Component {
               <span className="name">NTT</span>
             </NavLink>
           </div>
-          <div className="menu">
-            <NavLink to="/login" activeClassName="active">Login</NavLink>
-            <NavLink to="/register" activeClassName="active">Register</NavLink>
-          </div>
+          {
+            !!auth ?
+              <div className="menu">
+                Hello {auth.full_name}
+              </div>
+              :
+              <div className="menu">
+                <Link to="/login">Login</Link>
+                <Link to="/register">Register</Link>
+              </div>
+          }
+
         </div>
       </div>
     );
   }
 }
 
-export default Header;
+export default connect(function(state) {
+  return {auth: state.auth}
+})(Header);

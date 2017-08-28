@@ -1,9 +1,9 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import AuthService from 'AuthService';
-import {TextField, RaisedButton} from 'material-ui';
+import {DialogNotify} from '../Dialog/notify.js';
+import {TextField, RaisedButton, FlatButton} from 'material-ui';
 import {orange500, blue500} from 'material-ui/styles/colors';
-
-require('./index.scss');
 
 const styles = {
   errorStyle: {
@@ -29,7 +29,16 @@ class Login extends React.Component {
     super(props);
     this.state = {
         email: '',
+        openDialog: false,
         password: '',
+        error: {
+          email: '',
+          password: '',
+        },
+        dialog: {
+          title: '',
+          content: '',
+        },
     };
   }
 
@@ -41,22 +50,45 @@ class Login extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const path = 'http://abakus-backend.demo.beesightsoft.com/public/api/admin/login';
+    const {dispatch} = this.props;
+    const path = 'admin/login';
     const params = {
       email: this.state.email,
       password: this.state.password,
     };
     AuthService.login(path, params)
       .then((res) => {
-        debugger
+        const auth = res;
+        localStorage.setItem('authToken', auth.token);
+        dispatch({
+          type: 'ADD_ITEM',
+          item: auth.user
+        });
       })
       .catch((err) => {
-        debugger
-      });
+        const {error, code} = err;
 
+        if(code == 400) {
+          this.setState({
+            error: {
+              email: error.email ? error.email[0] : '',
+              password: error.password ? error.password[0] : ''
+            }
+          });
+        }else if(code == 404) {
+          this.setState({
+            openDialog: true,
+            dialog: {
+              title: 'Error Login',
+              content: error.message[0]
+            }
+          });
+        }
+      });
   }
 
   render() {
+    const {error, openDialog, dialog} = this.state;
     return (
       <div className="container-custom">
         <div className="form-login">
@@ -65,8 +97,9 @@ class Login extends React.Component {
             <TextField
               name="email"
               fullWidth={true}
-              defaultValue={this.state.email}
+              errorText={error.email}
               floatingLabelText="Email"
+              defaultValue={this.state.email}
               onChange={this.changeValue.bind()}
               underlineFocusStyle={styles.underlineFocusStyle}
               floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -75,8 +108,9 @@ class Login extends React.Component {
               type="password"
               name="password"
               fullWidth={true}
-              defaultValue={this.state.password}
+              errorText={error.password}
               floatingLabelText="Password"
+              defaultValue={this.state.password}
               onChange={this.changeValue.bind()}
               underlineFocusStyle={styles.underlineFocusStyle}
               floatingLabelFocusStyle={styles.floatingLabelFocusStyle}
@@ -97,4 +131,6 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default connect(function(state){
+  return {auth: state.auth}
+})(Login);

@@ -4,8 +4,12 @@ class AuthService {
   login = (path, params) => {
     return new Promise((resolve, reject) => {
       ApiService.post(path, params)
-        .then(resolve)
-        .catch(reject);
+        .then(res => {
+          resolve(res.data.data);
+        })
+        .catch(err => {
+          reject(err.response.data);
+        });
     });
   }
 

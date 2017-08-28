@@ -1,11 +1,11 @@
 import React from 'react';
+import store from 'store';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { HashRouter, Router, Route, Switch} from 'react-router-dom';
 
-require('./assets/css/color.scss');
 require('./assets/css/style.scss');
 
 import Login from 'Login';
@@ -17,7 +17,7 @@ import HomePage from 'HomePage';
 injectTapEventPlugin();
 
 ReactDOM.render(
-	<Provider>
+	<Provider store={store}>
 		<MuiThemeProvider>
 			<HashRouter>
 				<div>

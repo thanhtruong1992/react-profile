@@ -2,8 +2,6 @@ import React from 'react';
 import {TextField, RaisedButton, DatePicker} from 'material-ui';
 import {orange500, blue500} from 'material-ui/styles/colors';
 
-require('./index.scss');
-
 const styles = {
   errorStyle: {
     color: orange500,

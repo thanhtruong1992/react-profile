@@ -1,9 +1,10 @@
 import axios from 'axios';
+const url = 'http://abakus-backend.demo.beesightsoft.com/public/api/';
 
 class ApiService {
   get = (path, params) => {
     return new Promise((resolve, reject) => {
-      axios.get(path, params)
+      axios.get(url + path, params)
       .then(resolve)
       .catch(reject);
     });
@@ -11,7 +12,7 @@ class ApiService {
 
   post = (path, params) => {
     return new Promise((resolve, reject) => {
-      axios.post(path, params)
+      axios.post(url + path, params)
       .then(resolve)
       .catch(reject);
     });
